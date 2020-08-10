@@ -9,11 +9,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: Checkout  repo
-      uses: actions/checkout@master
+    - name: Checkout cloudspot repo
+      uses: actions/checkout@v1
       with:
         repository: cloudnativeready/cloudspot
-        path: cloudspot  
+        path: cloudspot
+        ref: master  
     - name: List files
       run: |
         ls -la
