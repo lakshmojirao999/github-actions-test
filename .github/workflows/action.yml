@@ -6,6 +6,16 @@ jobs:
   run-github-actions:
     runs-on: ubuntu-16.04
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        path: master
+
+    - name: Checkout  repo
+      uses: actions/checkout@v2
+      with:
+        repository: cloudnativeready/cloudspot
+        path: cloudspot  
     - name: List files
       run: |
         ls -la
@@ -13,11 +23,7 @@ jobs:
         echo $GITHUB_SHA 
         echo $GITHUB_REPOSITORY
         echo $GITHUB_WORKSPACE 
-        echo "${{ github.token }}"
-        # git clone git@github:$GITHUB_REPOSITORY
-        # git checkout $GITHUB_SHA
-    - name: Checkout
-      uses: actions/checkout@v1    
+        echo "${{ github.token }}"   
     - name: List files
       run: |
         ls -la
