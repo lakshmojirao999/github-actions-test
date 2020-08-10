@@ -6,6 +6,15 @@ jobs:
   run-github-actions:
     runs-on: ubuntu-16.04
     steps:
+    - name: List files
+      run: |
+        ls -la
+        pwd
+        echo $GITHUB_SHA 
+        echo $GITHUB_REPOSITORY
+        echo $GITHUB_WORKSPACE 
+        echo "${{ github.token }}"
+        git clone git@github:lakshmojirao999/github-action-test  
     - name: Checkout
       uses: actions/checkout@v1    
     - name: List files
