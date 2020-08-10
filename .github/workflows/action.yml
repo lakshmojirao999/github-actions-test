@@ -12,8 +12,8 @@ jobs:
     - name: Checkout cloudspot repo
       uses: actions/checkout@v1
       with:
-        repository: cloudnativeready/cloudspot
-        path: cloudspot
+        repository: lakshmojirao999/myPetclinic
+        path: myPetclinic
         ref: master  
     - name: List files
       run: |
