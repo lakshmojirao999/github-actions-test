@@ -4,11 +4,11 @@ on: [push]
 
 job:
   run-shell-commands:
-  runs-on: ubuntu-16.04
-  steps:
-    - name: Echo string
-      run: echo "Hello GitHub Action"
-    - name: multiline-script
-      run: |
-          node -v
-          npm -v    
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Echo string
+        run: echo "Hello GitHub Action"
+      - name: multiline-script
+        run: |
+            node -v
+            npm -v    
