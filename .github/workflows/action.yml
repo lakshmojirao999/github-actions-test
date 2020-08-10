@@ -7,12 +7,10 @@ jobs:
     runs-on: ubuntu-16.04
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        path: master
+      uses: actions/checkout@master
 
     - name: Checkout  repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@master
       with:
         repository: cloudnativeready/cloudspot
         path: cloudspot  
@@ -24,11 +22,6 @@ jobs:
         echo $GITHUB_REPOSITORY
         echo $GITHUB_WORKSPACE 
         echo "${{ github.token }}"   
-    - name: List files
-      run: |
-        ls -la
-        pwd
-  
     - name: Simple JS Actions
       id: greet
       uses: actions/hello-world-javascript-action@v1
