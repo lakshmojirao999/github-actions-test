@@ -6,8 +6,18 @@ on :
   # schedule:
   #   - cron: "0/5 * * * *"
   push:
-  pull_request: 
-    types: [closed,assigned,opened,reopened]
+    branches:
+    - master
+    - 'feature/*'
+    - 'release-*'
+  # pull_request: 
+  #   types: [closed,assigned,opened,reopened]
+    tags:
+      - v1.**
+    paths:
+      - '**.js'
+    paths-ignore:
+      - 'docs/**'  
     
 
 jobs:
