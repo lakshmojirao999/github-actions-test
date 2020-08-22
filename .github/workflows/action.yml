@@ -5,12 +5,12 @@ name: Actions Workflow
 on :
   # schedule:
   #   - cron: "0/5 * * * *"
-  push:
-    branches:
-    - master
-    - 'feature/*'
-    - 'release-*'
-  # pull_request: 
+  # push:
+  #   branches:
+  #   - master
+  #   - 'feature/*'
+  #   - 'release-*'
+  pull_request: 
   #   types: [closed,assigned,opened,reopened]
   # tags:
   #   - v1.**
