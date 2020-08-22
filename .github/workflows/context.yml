@@ -31,7 +31,8 @@ jobs:
         if: always()
         env:
           RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
+        run: eccho "$RUNNER_CONTEXT"
+        continue-on-error: true  #continue on error
       - name: Dump strategy context
         env:
           STRATEGY_CONTEXT: ${{ toJson(strategy) }}
