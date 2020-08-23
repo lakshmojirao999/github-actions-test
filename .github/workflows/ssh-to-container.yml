@@ -20,7 +20,12 @@ jobs:
       # This password you will use when authorizing via SSH 
         USER_PASS: ${{ secrets.PASSPHRASE }}
       #USER_PASS: murAmur
+    - name: Don't kill instace
+      if: ${{ failure() }}
+      run: sleep 1h  
+            
     - name: log node version
       run: |
         node -v
         cat /etc/os-release
+       
