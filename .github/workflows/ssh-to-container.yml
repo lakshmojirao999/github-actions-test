@@ -1,4 +1,4 @@
-name: Container
+name: ssh-to-container
 on: push
 
 jobs:
@@ -14,11 +14,11 @@ jobs:
       env:
       # After sign up on the https://ngrok.com/
       # You can find this token here: https://dashboard.ngrok.com/get-started/setup
-      NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
+        NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
       #NGROK_TOKEN: 1cu2nQXxljrX4mNGxz4z9N1QSfm_3JDS7Ek4Rti6oTwov43Sx
 
       # This password you will use when authorizing via SSH 
-      USER_PASS: ${{ secrets.PASSPHRASE }}
+        USER_PASS: ${{ secrets.PASSPHRASE }}
       #USER_PASS: murAmur
     - name: log node version
       run: |
