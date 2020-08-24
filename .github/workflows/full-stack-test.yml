@@ -129,8 +129,11 @@ jobs:
     - name: Update backend etc/hosts
       run: echo 127.0.0.1 foo.sapling.localhost| sudo tee -a /etc/hosts 
 
-    - name: Wait for DB
-      run: dockerize -wait tcp://localhost:5432 -timeout 1m
+    - name: Upload Artifact
+    - uses: actions/upload-artifact@v2
+      with:
+        name: coverage
+        path:  /home/circleci/project/coverage_results
 
 
     #Backend
