@@ -14,7 +14,8 @@ jobs:
       - name: Create applocatipn config
       #   env:
       #     CONFIG: lakshmoji
-        run: |        
+        run: | 
+          echo "lakshmoji" >> application.json       
           ls -la
 
 
