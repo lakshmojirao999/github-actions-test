@@ -15,7 +15,7 @@ jobs:
       #   env:
       #     CONFIG: lakshmoji
         run: | 
-          json='{"ENV": "b8f2b8b", "environment": "test", "tags_at_commit": "sometags", "project": "someproject", "current_date": "09/10/2014", "version": "someversion"}'
+          json='{"ENV": {} }'
           echo $json > application.json       
           ls -la
           cat application.json
