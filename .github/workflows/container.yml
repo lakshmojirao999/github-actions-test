@@ -6,6 +6,16 @@ jobs:
     runs-on: ubuntu-16.04
     container: 
       image: node:14.8.0-alpine3.10
+    strategy:
+      fail-fast: false
+      matrix:
+        # Set N number of parallel jobs you want to run tests on.
+        # Use higher number if you have slow tests to split them on more parallel jobs.
+        # Remember to update ci_node_index below to 0..N-1
+        ci_node_total: [8]
+        # set N-1 indexes for parallel jobs
+        # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
+        ci_node_index: [0, 1, 2, 3, 4, 5, 6, 7]      
     steps:
       - name: log node version
         run: |
@@ -19,7 +29,7 @@ jobs:
           echo $json > application.json       
           ls -la
           cat application.json
-          echo echo 127.0.0.1 foo.frontend.me | sudo tee -a /etc/hosts 
+
 
 
 
