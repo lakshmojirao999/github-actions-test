@@ -19,16 +19,17 @@ jobs:
       - name: Setup file system permissions
         run: |
           sudo chmod -R 777 $GITHUB_WORKSPACE /github /__w/ 
+          ls -l
       - name: log ruby version
         run: |
           ruby -v
           cat /etc/os-release
-      # - name: Create applocatipn config
-      #   run: | 
-      #     json='{"ENV": {} }'
-      #     echo $json > application.json       
-      #     ls -la
-      #     cat application.json
+      - name: Create applocatipn config
+        run: | 
+          json='{"ENV": {} }'
+          echo $json > application.json       
+          ls -la
+          cat application.json
       
       # - name: Update etc/hosts
       #   run: |
