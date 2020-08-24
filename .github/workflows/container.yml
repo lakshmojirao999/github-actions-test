@@ -18,8 +18,7 @@ jobs:
     steps:
       - name: Setup file system permissions
         run: |
-          sudo chmod -R 777 $GITHUB_WORKSPACE /github /
-          ls -l
+          sudo chmod -R 777 $GITHUB_WORKSPACE /github /__w/ 
       - name: log ruby version
         run: |
           ruby -v
