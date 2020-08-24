@@ -24,6 +24,9 @@ jobs:
         run: |
           ruby -v
           cat /etc/os-release
+          whoami
+          sh -c "sudo chown -R circleci /github"
+          sh -c "sudo chmod -R 777 /github"
       
       - name: Create applocatipn config
         run: | 
