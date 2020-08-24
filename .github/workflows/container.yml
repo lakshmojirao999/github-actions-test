@@ -31,10 +31,10 @@ jobs:
           ls -la
           cat application.json
       
-      # - name: Update etc/hosts
-      #   run: |
-      #     echo 127.0.0.1 foo.frontend.me > /etc/hosts
-      #     cat /etc/hosts  
+      - name: Update etc/hosts
+        run: |
+          echo 127.0.0.1 foo.frontend.me > /etc/hosts
+          cat /etc/hosts  
       
       # - name: Setup Code Climate test-reporter
       #   run: |
