@@ -15,8 +15,10 @@ jobs:
       #   env:
       #     CONFIG: lakshmoji
         run: | 
-          echo "lakshmoji" >> application.json       
+          echo "{"ENV":{}}" >> application.json       
           ls -la
+          cat application.json
+
 
 
 
