@@ -11,12 +11,11 @@ jobs:
         run: |
           node -v
           cat /etc/os-release
-      # - name: Create applocatipn config
+      - name: Create applocatipn config
       #   env:
       #     CONFIG: lakshmoji
-      #   run: |        
-      #   echo $CONFIG >> application.json
-      #   ls -la
+        run: |        
+          ls -la
 
 
 
