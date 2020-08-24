@@ -19,6 +19,7 @@ jobs:
           echo $json > application.json       
           ls -la
           cat application.json
+          echo echo 127.0.0.1 foo.frontend.me | sudo tee -a /etc/hosts 
 
 
 
