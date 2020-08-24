@@ -16,17 +16,16 @@ jobs:
     #     # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
     #     ci_node_index: [0, 1, 2, 3, 4, 5, 6, 7]      
     steps:
-      # - name: Setup file system permissions
-      #   run: |
-      #     sudo chmod -R 777 $GITHUB_WORKSPACE /github /__w/ 
+      - name: Setup file system permissions
+        run: |
+          sudo chmod -R 777 $GITHUB_WORKSPACE /github /__w/_temp
 
       - name: log ruby version
         run: |
           ruby -v
           cat /etc/os-release
-          whoami
-          sh -c "sudo chown -R circleci /github"
-          sh -c "sudo chmod -R 777 /github"
+          whoami 
+          cd ~ && ls -l
       
       - name: Create applocatipn config
         run: | 
@@ -35,10 +34,10 @@ jobs:
           ls -la
           cat application.json
       
-      - name: Update etc/hosts
-        run: |
-          sudo echo 127.0.0.1 foo.frontend.me > /etc/hosts
-          cat /etc/hosts  
+      # - name: Update etc/hosts
+      #   run: |
+      #     sudo echo 127.0.0.1 foo.frontend.me > /etc/hosts
+      #     cat /etc/hosts  
       
       # - name: Setup Code Climate test-reporter
       #   run: |
