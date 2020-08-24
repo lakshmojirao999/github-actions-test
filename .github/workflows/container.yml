@@ -37,14 +37,14 @@ jobs:
       - name: Update etc/hosts
         run: echo 127.0.0.1 foo.frontend.me | sudo tee -a /etc/hosts  
       
-      # - name: Setup Code Climate test-reporter
-      #   run: |
-      #       curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-      #       chmod +x ./cc-test-reporter
+      - name: Setup Code Climate test-reporter
+        run: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
 
-      # - name: Code Climate before-build
-      #   run: |
-      #     ./cc-test-reporter before-build
+      - name: Code Climate before-build
+        run: |
+          ./cc-test-reporter before-build
 
                      
 
