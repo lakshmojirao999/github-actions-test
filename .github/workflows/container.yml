@@ -13,8 +13,9 @@ jobs:
           cat /etc/os-release
       - name: Create applocatipn config
         run: |
-        echo "{\"ENV\" : {}}" >> application.json
+        echo `{ \"ENV\" : {} }` >> application.json
         ls -la
+        cat ./application.json
 
 
 
