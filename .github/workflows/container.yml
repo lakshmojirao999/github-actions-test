@@ -5,8 +5,6 @@ jobs:
   node-docker:
     runs-on: ubuntu-16.04
     container: circleci/ruby:2.6.3-node-browsers-legacy
-    with:
-      entrypoint: ./entrypoint.sh
     # strategy:
     #   fail-fast: false
     #   matrix:
@@ -36,7 +34,7 @@ jobs:
       
       - name: Update etc/hosts
         run: |
-          echo 127.0.0.1 foo.frontend.me > /etc/hosts
+          sudo echo 127.0.0.1 foo.frontend.me > /etc/hosts
           cat /etc/hosts  
       
       # - name: Setup Code Climate test-reporter
