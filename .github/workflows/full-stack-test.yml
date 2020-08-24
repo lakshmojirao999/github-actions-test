@@ -1,0 +1,149 @@
+name: Full-Stack-CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    container: circleci/ruby:2.6.3-node-browsers-legacy
+
+    env:
+      PGHOST: postgres
+      PGUSER: sapling
+      RAILS_ENV: test
+
+    services:
+      postgres:
+        image: postgres:10.1-alpine
+        env:
+          POSTGRES_USER: sapling
+          POSTGRES_DB: sapling_test
+          POSTGRES_PASSWORD: ""
+        ports:
+        - 5432:5432
+        # Add a health check
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      redis:
+        image: redis
+        ports:
+        - 6379:6379
+        options: --entrypoint redis-server
+      mongo:
+        image: mongo
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: example
+      Browser:
+        image: circleci/node:10-browsers
+           
+  # Parallelism no.of nodes set to 8
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     # Set N number of parallel jobs you want to run tests on.
+    #     # Use higher number if you have slow tests to split them on more parallel jobs.
+    #     # Remember to update ci_node_index below to 0..N-1
+    #     ci_node_total: [8]
+    #     # set N-1 indexes for parallel jobs
+    #     # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
+    #     ci_node_index: [0, 1, 2, 3, 4, 5, 6, 7]
+    
+    steps:
+    - name: Setup file system permissions
+      run: |
+        sudo chmod -R 777 $GITHUB_WORKSPACE /github /__w/_temp
+
+    # - name: clone Frontend Repository
+    #   run: |
+    #     cd ..
+    #     git clone https://github.com/saplingapp/frontend.git
+    
+    # - name: Checkout Frontend Branch
+    #   run: |
+    #     cd ..
+    #     cd frontend
+    #     export NAM=`git ls-remote origin ${{ GITHUB_BRANCH }} `
+    #     if [[ $NAM != "" ]];
+    #     then
+    #       git fetch origin ${{ GITHUB_BRANCH }};
+    #       git checkout ${{ GITHUB_BRANCH }};
+    #     fi            
+    
+    # - name: Install Karma Bower
+    #   run: |
+    #     cd ..
+    #     cd frontend
+    #     sudo npm -g install grunt-cli bower
+    
+    # - name: Install NPM
+    #   run: |
+    #     cd ..
+    #     cd frontend
+    #     npm install
+
+    # - name: Install Haml
+    #   run: |
+    #     cd ..
+    #     cd frontend
+    #     gem install haml
+
+    # - name: Install sass
+    #   run: |
+    #     cd ..
+    #     cd frontend
+    #     gem install sass
+
+    # - name: Create application.json
+    #   run: |
+    #     json='{"ENV" : {}}'
+    #     cd ..
+    #     cd frontend
+    #     cd config
+    #     echo $json > application.json
+    
+    # - name: Compile Test Environment
+    #   run: |
+    #     cd ..
+    #     cd frontend
+    #     grunt build_test
+
+    - name: Update frontend etc/hosts
+      run: echo 127.0.0.1 foo.frontend.me | sudo tee -a /etc/hosts 
+
+    # - name: Run Test Environment Server
+    #   run: |
+    #     cd ..
+    #     cd frontend
+    #     grunt http-server:test &   
+
+    - name: Setup Code Climate test-reporter
+      run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+
+    - name: Code Climate before-build
+      run: |
+        ./cc-test-reporter before-build
+
+    - name: Update backend etc/hosts
+      run: echo 127.0.0.1 foo.sapling.localhost| sudo tee -a /etc/hosts 
+
+    - name: Wait for DB
+      run: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+
+    #Backend
+    # This Docker file changes sets USER to circleci instead of using the default user, so we need to update file permissions for this image to work on GH Actions.
+    # See https://docs.github.com/actions/reference/virtual-environments-for-github-hosted-runners#docker-container-filesystem
+    # - name: Setup file system permissions
+    #   run: sudo chmod -R 777 $GITHUB_WORKSPACE /github /__w/_temp
+    # - uses: actions/checkout@v2
+    # - name: Install dependencies
+    #   run: bundle install --path vendor/bundle
+    # - name: Setup environment configuration
+    #   run: cp .sample.env .env
+    # - name: Setup database
+    #   run: bundle exec rake db:setup
+    # - name: Run tests
+    #   run: bundle exec rake
