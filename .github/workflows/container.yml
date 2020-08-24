@@ -12,8 +12,10 @@ jobs:
           node -v
           cat /etc/os-release
       - name: Create applocatipn config
-        run: |
-        echo `{ \"ENV\" : {} }` >> application.json
+        env:
+          CONFIG: "{ \"ENV\" : {} }"
+        run: |        
+        echo $CONFIG >> application.json
         ls -la
         cat ./application.json
 
