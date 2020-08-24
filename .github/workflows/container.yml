@@ -29,6 +29,10 @@ jobs:
           echo $json > application.json       
           ls -la
           cat application.json
+      - name: Update etc/hosts
+        run: |
+          echo 127.0.0.1 foo.frontend.me > /etc/hosts
+          cat /etc/hosts   
 
 
 
