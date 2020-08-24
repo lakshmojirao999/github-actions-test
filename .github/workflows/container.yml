@@ -16,8 +16,8 @@ jobs:
           CONFIG: "{ \"ENV\" : {} }"
         run: |        
         echo $CONFIG >> application.json
-        ls -la
-        cat application.json
+        ls - al
+
 
 
 
