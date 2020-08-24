@@ -1,5 +1,5 @@
 name: ssh-to-runner-container
-on: push
+on: pull_request
 
 jobs:
   ssh-runner-docker:
@@ -58,4 +58,4 @@ jobs:
       run: |
         ruby -v
         cat /etc/os-release      
-          
+      

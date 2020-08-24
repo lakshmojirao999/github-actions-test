@@ -1,5 +1,5 @@
 name: Container
-on: pull_request
+on: push
 
 jobs:
   node-docker:
@@ -11,6 +11,11 @@ jobs:
         run: |
           node -v
           cat /etc/os-release
+      - name: Create applocatipn config
+        run: |
+        echo "{\"ENV\" : {}}" >> application.json
+        ls -la
+
 
 
       
